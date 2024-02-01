@@ -1,19 +1,16 @@
 function getMinMax(str) {
   let result = {};
-  let newArr = [];
-  let numbers = str.split(" ");
-  for (let number of numbers) {
-    newArr.push(parseFloat(number));
-  }
 
-  let min = newArr[0];
-  let max = newArr[0];
-  for (let i = 1; i < newArr.length; i++) {
-    if (newArr[i] < min) {
-      min = newArr[i];
+  let numbers = str.split(" ").map(Number);
+
+  let min = numbers[0];
+  let max = numbers[0];
+  for (let i = 1; i < numbers.length; i++) {
+    if (numbers[i] < min) {
+      min = numbers[i];
     }
-    if (newArr[i] > max) {
-      max = newArr[i];
+    if (numbers[i] > max) {
+      max = numbers[i];
     }
   }
 
