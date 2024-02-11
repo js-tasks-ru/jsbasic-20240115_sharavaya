@@ -4,23 +4,24 @@ function initCarousel() {
   let left = document.querySelector(".carousel__arrow_left");
   let totalWidth = switchTool.offsetWidth;
   let currentOffset = 0;
+  let maxOffset = -(totalWidth * 3);
 
   left.style.display = "none";
 
   right.addEventListener("click", function (event) {
-    currentOffset -= 500;
+    currentOffset -= totalWidth;
     switchTool.style.transform = `translateX(${currentOffset}px)`;
     if (event) {
       left.style.display = "";
     }
-    if (currentOffset > -2500) {
+    if (currentOffset <= maxOffset) {
       right.style.display = "none";
     }
     console.log(currentOffset);
   });
 
   left.addEventListener("click", function (event) {
-    currentOffset += 500;
+    currentOffset += totalWidth;
     switchTool.style.transform = `translateX(${currentOffset}px)`;
     if (event) {
       right.style.display = "";
@@ -31,8 +32,3 @@ function initCarousel() {
     console.log(currentOffset);
   });
 }
-
-//Вот эта проверка обрабатывается тестами, но слайдер после 1 клика перестает корректно работать
-// if (currentOffset > -2500) {
-//   right.style.display = "none";
-// }
