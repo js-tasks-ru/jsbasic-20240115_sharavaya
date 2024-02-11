@@ -1,4 +1,5 @@
 function initCarousel() {
+
   let switchTool = document.querySelector(".carousel__inner");
   let right = document.querySelector(".carousel__arrow_right");
   let left = document.querySelector(".carousel__arrow_left");
@@ -36,3 +37,4 @@ function initCarousel() {
 // if (currentOffset > -2500) {
 //   right.style.display = "none";
 // }
+
