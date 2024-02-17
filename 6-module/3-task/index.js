@@ -9,57 +9,36 @@ export default class Carousel {
   }
 
   render() {
-    this.elem = document.createElement("div");
-    this.elem.className = "carousel";
-
-    let innerHTML = `<div class="carousel__arrow carousel__arrow_right">
-            <img src="/assets/images/icons/angle-icon.svg" alt="icon">
+    this.elem = createElement(`
+      <div class="carousel">
+        <div class="carousel__arrow carousel__arrow_right">
+          <img src="/assets/images/icons/angle-icon.svg" alt="icon">
         </div>
         <div class="carousel__arrow carousel__arrow_left" style="display: none;">
-            <img src="/assets/images/icons/angle-left-icon.svg" alt="icon">
+          <img src="/assets/images/icons/angle-left-icon.svg" alt="icon">
         </div>
-        <div class="carousel__inner"></div>
-    `;
-    this.elem.innerHTML = innerHTML;
-
-    let inner = this.elem.querySelector(".carousel__inner");
-    this.slides.forEach((slide) => {
-      let slideElem = document.createElement("div");
-      slideElem.className = "carousel__slide";
-      slideElem.dataset.id = slide.id;
-
-      let img = document.createElement("img");
-      img.src = `/assets/images/carousel/${slide.image}`;
-      img.className = "carousel__img";
-      img.alt = "slide";
-
-      let caption = document.createElement("div");
-      caption.className = "carousel__caption";
-
-      let price = document.createElement("span");
-      price.className = "carousel__price";
-      price.textContent = `€${slide.price.toFixed(2)}`;
-
-      let title = document.createElement("div");
-      title.className = "carousel__title";
-      title.textContent = slide.name;
-
-      let button = document.createElement("button");
-      button.type = "button";
-      button.className = "carousel__button";
-
-      let icon = document.createElement("img");
-      icon.src = "/assets/images/icons/plus-icon.svg";
-      icon.alt = "icon";
-
-      button.appendChild(icon);
-      caption.appendChild(price);
-      caption.appendChild(title);
-      caption.appendChild(button);
-      slideElem.appendChild(img);
-      slideElem.appendChild(caption);
-      inner.appendChild(slideElem);
-    });
+        <div class="carousel__inner">
+          ${this.slides
+            .map(
+              (slide) => `
+            <div class="carousel__slide" data-id="${slide.id}">
+              <img src="/assets/images/carousel/${
+                slide.image
+              }" class="carousel__img" alt="slide">
+              <div class="carousel__caption">
+                <span class="carousel__price">€${slide.price.toFixed(2)}</span>
+                <div class="carousel__title">${slide.name}</div>
+                <button type="button" class="carousel__button">
+                  <img src="/assets/images/icons/plus-icon.svg" alt="icon">
+                </button>
+              </div>
+            </div>
+          `
+            )
+            .join("")}
+        </div>
+      </div>
+    `);
   }
 
   initCarousel() {
@@ -105,3 +84,7 @@ export default class Carousel {
     });
   }
 }
+
+// Теперь вроде ОК...
+// Получается при присвоении this.elem и происходит импорт? Не совсем понял.
+// Ещё момент - переключалка все так же тупит xD

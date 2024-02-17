@@ -20,39 +20,42 @@ export default class UserTable {
 
   createTable() {
     const table = document.createElement("table");
+    table.innerHTML = `<thead>
+          <tr>
+            <td>Имя</td>
+            <td>Возраст</td>
+            <td>Зарплата</td>
+            <td>Город</td>
+            <td></td>
+          </tr>
+      </thead>
+      <tbody>
+          ${this.rows
+            .map(
+              (row) => `
+              <tr>
+                <td>${row.name}</td>
+                <td>${row.age}</td>
+                <td>${row.salary}</td>
+                <td>${row.city}</td>
+                <td>
+                  <button>X</button>
+                </td>
+              </tr>
+            `
+            )
+            .join("")}
+      </tbody>
+    `;
 
-    const thead = document.createElement("thead");
-    const headerRow = document.createElement("tr");
-    ["Имя", "Возраст", "Зарплата", "Город"].forEach((headerText) => {
-      const th = document.createElement("th");
-      th.textContent = headerText;
-      headerRow.appendChild(th);
+    table.addEventListener("click", (event) => {
+      if (event.target.tagName === "BUTTON") {
+        event.target.closest("tr").remove();
+      }
     });
-    thead.appendChild(headerRow);
-    table.appendChild(thead);
-
-    const tbody = document.createElement("tbody");
-    this.rows.forEach((rowData) => {
-      const row = document.createElement("tr");
-      Object.values(rowData).forEach((cellData) => {
-        const cell = document.createElement("td");
-        cell.textContent = cellData;
-        row.appendChild(cell);
-      });
-      const deleteCell = document.createElement("td");
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "X";
-      deleteButton.addEventListener("click", () => {
-        row.remove();
-      });
-      deleteCell.appendChild(deleteButton);
-      row.appendChild(deleteCell);
-      tbody.appendChild(row);
-    });
-    table.appendChild(tbody);
 
     return table;
   }
 }
 
-// Ужас, а не задача (без гугла не обошлось, в частности 42ая строка).
+// А нормальная практика засовывать прослушку в конструктор?
