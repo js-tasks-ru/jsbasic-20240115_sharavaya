@@ -7,46 +7,49 @@ export default class StepSlider {
     this.progress = this.elem.querySelector(".slider__progress");
     this.stepsElements = this.elem.querySelectorAll(".slider__steps span");
 
-    this.thumb.addEventListener("pointerdown", (event) =>
-      this.onThumbPointerDown(event)
-    );
-    this.elem.addEventListener("click", (event) => this.onSliderClick(event));
+    this.thumb.addEventListener("pointerdown", this.onThumbPointerDown);
+    this.elem.addEventListener("click", this.onSliderClick);
 
     this.setValue(this.value);
   }
 
   renderSlider() {
     const slider = document.createElement("div");
-    slider.classList.add("slider");
+    slider.className = "slider";
     slider.innerHTML = `
-            <div class="slider__thumb" draggable="true"><span class="slider__value">0</span></div>
-            <div class="slider__progress"></div>
-            <div class="slider__steps">
-                ${Array(this.steps).fill("<span></span>").join("")}
-            </div>
-       `;
+        <div class="slider__thumb" draggable="true"><span class="slider__value">${
+          this.value
+        }</span></div>
+        <div class="slider__progress"></div>
+        <div class="slider__steps">
+            ${Array(this.steps).fill("<span></span>").join("")}
+        </div>
+    `;
     return slider;
   }
 
   setValue(newValue) {
     this.value = newValue;
+    const leftPercents = (100 * this.value) / (this.steps - 1);
+
+    this.thumb.style.left = `${leftPercents}%`;
+    this.progress.style.width = `${leftPercents}%`;
+
     this.thumb.querySelector(".slider__value").textContent = this.value;
+
     this.stepsElements.forEach((step, index) => {
       step.classList.toggle("slider__step-active", index === this.value);
     });
 
-    const leftPercents = (100 * this.value) / (this.steps - 1);
-    this.thumb.style.left = `${leftPercents}%`;
-    this.progress.style.width = `${leftPercents}%`;
+    this.emitChangeEvent(this.value);
   }
 
   emitChangeEvent(value) {
-    this.elem.dispatchEvent(
-      new CustomEvent("slider-change", {
-        detail: value,
-        bubbles: true,
-      })
-    );
+    const event = new CustomEvent("slider-change", {
+      detail: value,
+      bubbles: true,
+    });
+    this.elem.dispatchEvent(event);
   }
 
   onThumbPointerDown = (event) => {
@@ -56,18 +59,16 @@ export default class StepSlider {
 
     const moveThumb = (event) => {
       const sliderRect = this.elem.getBoundingClientRect();
-      let newValue = Math.round(
-        ((event.clientX - sliderRect.left) / sliderRect.width) *
-          (this.steps - 1)
-      );
+      let newLeft = event.clientX - sliderRect.left;
 
-      if (newValue < 0) {
-        newValue = 0;
-      } else if (newValue > this.steps - 1) {
-        newValue = this.steps - 1;
+      if (newLeft < 0) {
+        newLeft = 0;
+      } else if (newLeft > this.elem.offsetWidth) {
+        newLeft = this.elem.offsetWidth;
       }
 
-      this.setValue(newValue);
+      this.thumb.style.left = `${(newLeft / this.elem.offsetWidth) * 100}%`;
+      this.progress.style.width = this.thumb.style.left;
     };
 
     const stopMoveThumb = () => {
@@ -75,7 +76,9 @@ export default class StepSlider {
       document.removeEventListener("pointermove", moveThumb);
       document.removeEventListener("pointerup", stopMoveThumb);
 
-      this.emitChangeEvent(this.value);
+      const leftPercents = parseInt(this.thumb.style.left);
+      const newValue = Math.round(leftPercents / (100 / (this.steps - 1)));
+      this.setValue(newValue);
     };
 
     document.addEventListener("pointermove", moveThumb);
@@ -90,7 +93,6 @@ export default class StepSlider {
           (this.steps - 1)
       );
       this.setValue(newValue);
-      this.emitChangeEvent(newValue);
     }
   };
 }
