@@ -6,6 +6,7 @@ export default class Cart {
   }
 
   addProduct(product) {
+
     if (!product) return;
 
     let cartItem = this.cartItems.find(
@@ -52,3 +53,31 @@ export default class Cart {
     this.cartIcon.update(this);
   }
 }
+
+    // ваш код
+  }
+
+  updateProductCount(productId, amount) {
+    // ваш код
+  }
+
+  isEmpty() {
+    // ваш код
+  }
+
+  getTotalCount() {
+    // ваш код
+  }
+
+  getTotalPrice() {
+    // ваш код
+  }
+
+  onProductUpdate(cartItem) {
+    // реализуем в следующей задаче
+
+    this.cartIcon.update(this);
+  }
+}
+
+

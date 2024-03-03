@@ -1,19 +1,31 @@
+
 import createElement from "../../assets/lib/create-element.js";
 import escapeHtml from "../../assets/lib/escape-html.js";
 
 import Modal from "../../7-module/2-task/index.js";
+
+import createElement from '../../assets/lib/create-element.js';
+import escapeHtml from '../../assets/lib/escape-html.js';
+
+import Modal from '../../7-module/2-task/index.js';
+
 
 export default class Cart {
   cartItems = []; // [product: {...}, count: N]
 
   constructor(cartIcon) {
     this.cartIcon = cartIcon;
+
     this.cartItems = [];
     this.modal = new Modal();
+
+
+
     this.addEventListeners();
   }
 
   addProduct(product) {
+
     if (!product) return;
 
     let cartItem = this.cartItems.find(
@@ -57,11 +69,36 @@ export default class Cart {
       (total, item) => total + item.product.price * item.count,
       0
     );
+
+    // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
+  }
+
+  updateProductCount(productId, amount) {
+    // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
+  }
+
+  isEmpty() {
+    // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
+  }
+
+  getTotalCount() {
+    // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
+  }
+
+  getTotalPrice() {
+    // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
+
   }
 
   renderProduct(product, count) {
     return createElement(`
+
     <div class="cart-product" data-product-id="${product.id}">
+
+    <div class="cart-product" data-product-id="${
+      product.id
+    }">
+
       <div class="cart-product__img">
         <img src="/assets/images/products/${product.image}" alt="product">
       </div>
@@ -109,6 +146,7 @@ export default class Cart {
   }
 
   renderModal() {
+
     this.modal = new Modal(); // Создаем объект this.modal
     this.modal.setTitle("Your order");
     const modalBody = document.createElement("div");
@@ -233,6 +271,20 @@ export default class Cart {
         }
       });
   }
+
+    // ...ваш код
+  }
+
+  onProductUpdate(cartItem) {
+    // ...ваш код
+
+    this.cartIcon.update(this);
+  }
+
+  onSubmit(event) {
+    // ...ваш код
+  };
+
 
   addEventListeners() {
     this.cartIcon.elem.onclick = () => this.renderModal();
