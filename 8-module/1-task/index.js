@@ -1,6 +1,6 @@
 
 import createElement from "../../assets/lib/create-element.js";
-=======
+
 import createElement from '../../assets/lib/create-element.js';
 
 
@@ -19,7 +19,7 @@ export default class CartIcon {
     if (!cart.isEmpty()) {
 
       this.elem.classList.add("cart-icon_visible");
-=======
+
       this.elem.classList.add('cart-icon_visible');
 
 
@@ -176,12 +176,7 @@ export default class CartIcon {
 //   }
 // }
 
-    document.addEventListener('scroll', () => this.updatePosition());
-    window.addEventListener('resize', () => this.updatePosition());
-  }
+    
 
-  updatePosition() {
-    // ваш код ...
-  }
-}
+  
 
