@@ -54,24 +54,6 @@ export default class Cart {
   }
 }
 
-    // ваш код
-  }
-
-  updateProductCount(productId, amount) {
-    // ваш код
-  }
-
-  isEmpty() {
-    // ваш код
-  }
-
-  getTotalCount() {
-    // ваш код
-  }
-
-  getTotalPrice() {
-    // ваш код
-  }
 
   onProductUpdate(cartItem) {
     // реализуем в следующей задаче
