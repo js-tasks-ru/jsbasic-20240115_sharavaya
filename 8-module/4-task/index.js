@@ -70,26 +70,6 @@ export default class Cart {
       0
     );
 
-    // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
-  }
-
-  updateProductCount(productId, amount) {
-    // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
-  }
-
-  isEmpty() {
-    // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
-  }
-
-  getTotalCount() {
-    // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
-  }
-
-  getTotalPrice() {
-    // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
-
-  }
-
   renderProduct(product, count) {
     return createElement(`
 
@@ -271,20 +251,6 @@ export default class Cart {
         }
       });
   }
-
-    // ...ваш код
-  }
-
-  onProductUpdate(cartItem) {
-    // ...ваш код
-
-    this.cartIcon.update(this);
-  }
-
-  onSubmit(event) {
-    // ...ваш код
-  };
-
 
   addEventListeners() {
     this.cartIcon.elem.onclick = () => this.renderModal();
