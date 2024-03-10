@@ -55,11 +55,6 @@ export default class Cart {
 }
 
 
-  onProductUpdate(cartItem) {
-    // реализуем в следующей задаче
-
-    this.cartIcon.update(this);
-  }
-}
+ 
 
 
