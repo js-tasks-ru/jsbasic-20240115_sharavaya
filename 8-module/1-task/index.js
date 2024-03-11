@@ -1,8 +1,4 @@
-
 import createElement from "../../assets/lib/create-element.js";
-
-
-
 
 export default class CartIcon {
   constructor() {
@@ -131,50 +127,6 @@ export default class CartIcon {
   }
 }
 
-// updatePosition() {
-//   if (!this.elem.offsetWidth && !this.elem.offsetHeight) {
-//     return;
-//   }
-
-//   if (document.documentElement.clientWidth <= 767) {
-//     return;
-//   }
-
-//   let topIndent = 50;
-//   let containerElement = document.querySelector(".container");
-//   if (!containerElement) {
-//     return;
-//   }
-
-//   let leftIndent = Math.min(
-//     containerElement.getBoundingClientRect().right + 20,
-//     document.documentElement.clientWidth - this.elem.offsetWidth - 10
-//   );
-//   leftIndent = Math.round(leftIndent);
-
-//   if (
-//     window.scrollY > topIndent &&
-//     this.elem.getBoundingClientRect().top < 0
-//   ) {
-//     Object.assign(this.elem.style, {
-//       position: "fixed",
-//       top: `${topIndent}px`,
-//       left: `${Math.max(20, leftIndent)}px`,
-//       zIndex: 1000,
-//     });
-//   } else {
-//     Object.assign(this.elem.style, {
-//       position:
-//         window.scrollY >=
-//         document.documentElement.scrollHeight - window.innerHeight
-//           ? "fixed"
-//           : "",
-//       top: "",
-//       left: "",
-//       zIndex: "",
-//     });
-//   }
-// }
 
     
 
