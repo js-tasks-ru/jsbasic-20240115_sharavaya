@@ -16,7 +16,7 @@ export default class CartIcon {
 
       this.elem.classList.add("cart-icon_visible");
 
-      this.elem.classList.add('cart-icon_visible');
+      
 
 
       this.elem.innerHTML = `
