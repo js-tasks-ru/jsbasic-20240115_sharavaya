@@ -30,12 +30,10 @@ export default class ProductGrid {
   }
 
   updateFilter(filters) {
-    Object.assign(this.filters, filters);
-    this.filteredProducts = this.products.filter((product) =>
-      this.filterProduct(product)
-    );
+    this.filters = { ...this.filters, ...filters }; 
+    this.filteredProducts = this.products.filter((product) => this.filterProduct(product));
     this.updateProductGrid();
-  }
+}
 
   filterProduct(product) {
     return Object.keys(this.filters).every((key) => {
