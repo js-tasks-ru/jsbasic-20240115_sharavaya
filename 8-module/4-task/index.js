@@ -62,6 +62,7 @@ export default class Cart {
       (total, item) => total + item.product.price * item.count,
       0
     );
+  }  
 
   renderProduct(product, count) {
     return createElement(`
